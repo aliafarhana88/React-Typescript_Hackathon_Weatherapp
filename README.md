@@ -1,74 +1,46 @@
-# React/TypeScript Hackathon
+# Getting Started with Create React App
 
-## Challenge
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Build a weather checker app using TypeScript and React that satisfies all of the requirements below. Initialise your TypeScript project in this repo. (Remember that Create React App provides a TypeScript template, which makes it easy to get started with TypeScript and React.)
+## Available Scripts
 
-## Core Requirements
+In the project directory, you can run:
 
-### Planning and documentation
+### `npm start`
 
-- Before coding your app, you should create a component tree diagram within this repository.
-- Each component in the diagram should have details on the below (where relevant)
-  - state (if any)
-  - props (if any)
-  - behaviours (the different ways that the state is updated, if there is a state)
-- Your app should have a readme that describes its functionality and how it should be used. You can use a tool like [Readme.so](https://readme.so/editor) to help do this.
-- It's worth planning out your day into mini-sprints/chunks and collectively agree on what work can be completed during each sprint. That way if you spend too long on a particular problem, you can re-evaluate things as a team and course correct earlier.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Code and functionality
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-- Your app should be in TypeScript! Some resources that might be helpful as a starting point:
+### `npm test`
 
-  - https://github.com/typescript-cheatsheets/react#reacttypescript-cheatsheets
-  - https://profy.dev/article/react-typescript
-  - https://www.carlrippon.com/React-event-handlers-with-typescript/
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- The user should be able to input the name of a city and have weather information about that city added to the page. Use the following API to get your weather information: https://openweathermap.org/api. You'll need to sign up for the free tier to get an API key.
-- Your app should have at least one other function/feature in addition to being able to check weather information about a city. Be creative!
+### `npm run build`
 
-## Optional bonuses:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Explore (and possibly use) any of the below.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- CSS modules
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-  - A handy, low-effort feature supported by Create React App, which allows you to scope CSS rules to just a component: https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/
-  - This is a good idea, as it ensures that one component's CSS rules don't affect another, even if they happen to use the same class names
+### `npm run eject`
 
-- Conditional CSS classes
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-  - A handy way of conditionally applying CSS classes (without having to resort to messy conditional string concatenation/interpolation in JS/TS): https://www.npmjs.com/package/clsx
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-- React Router
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-  - A way to add multiple pages to your app: https://reactrouter.com/en/main
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-- A CSS framework
+## Learn More
 
-  - A CSS framework that comes with small utility classes that you can use to style your UI/JSX: https://tailwindcss.com/
-  - Makes it easier to achieve common tasks on the frontend (e.g. vertically/horizontally center an element)
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-- Forms
-
-  - A way to add forms to an app and simplify many of the details: https://react-hook-form.com/
-
-- Animation libraries
-
-  - A way to add animation and motion to your app: https://blog.logrocket.com/best-react-animation-library-top-7-libraries-compared/
-  - It's also a good idea to read up motion/animation from an accessibility perspective too: https://web.dev/prefers-reduced-motion/
-
-- Tests
-
-  - Practice writing tests in TypeScript whilst also getting some confidence that the important parts of your app behave correctly.
-  - Might be helpful (starting from "Testing a Basic Component"): https://www.pluralsight.com/guides/how-to-test-react-components-in-typescript#module-testingabasiccomponent
-
----
-
-If you get errors regarding missing types for the NPM packages that you're trying to use in your TypeScript application, use these as a starting point:
-
-- https://www.w3schools.com/typescript/typescript_definitely_typed.php
-
-- https://stackoverflow.com/a/39907679
-
-It's also worth searching that package's documentation/website for "TypeScript", in case it contains any direct guidance on how to use their package with TypeScript.
+To learn React, check out the [React documentation](https://reactjs.org/).
