@@ -1,0 +1,18 @@
+.weather-display {
+    background-color: grey;
+    display: flex;
+    justify-content : center; /*center the text in the div horizontally*/
+    padding: 50px 0; /*center the text in the div vertically*/
+    flex-direction: column;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px silver;
+    position: relative;
+    left: 25%; /*this centers the div horizontally*/
+    min-height: 20vh;
+    width: 50vw;
+    
+ 
+    
+   
+
+}

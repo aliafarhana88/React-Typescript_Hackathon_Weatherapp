@@ -3,6 +3,8 @@ import logo from '../../logo.svg';
 import './App.css';
 import{useState, useEffect} from "react"
 import useFetch from "../../Hook/useFetch"
+import InputField from '../InputField/InputField';
+import WeatherObject from '../WeatherCard/WeatherCard';
 
 function App() {
 //fetch geocode (for latitude and longitude based on location)
@@ -10,34 +12,32 @@ function App() {
 //stretch goal: put this useFetch in a hook
 const [cityState, setCityState] = useState("");
 
-const openWeatherKey = `93c6846846162e94cd5a1504b5337195`;
-const city = `Manchester`
+
+const openWeatherKey = process.env.REACT_APP_OPEN_WEATHER_KEY;
+const city = `London`
 const geoCodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${openWeatherKey}`;
 
 const data = useFetch(geoCodeURL);
 
+//get the lat and lon, round to two decimals
+const lat = (data[0]?.lat.toFixed(2))
+const lon = (data[0]?.lon.toFixed(2))
+console.log(`this is lat: ${lat}, this is lon: ${lon}`)
 
-console.log(data[0]?.lat)
-console.log(data[0]?.lon)
+
+
+
 
 
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>weather in {city}</p>
       </header>
+      <InputField className = "input-field" placeholder = "enter your city"/>
+      <WeatherObject lat = {lat} lon = {lon}/>
+      
     </div>
   );
 }

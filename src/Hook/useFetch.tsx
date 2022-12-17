@@ -6,22 +6,41 @@ import {useState, useEffect } from "react"
 // }
 
 //this is a custom hook that fetches an API
-function useFetch(url:string){
+function useFetch(url:string | undefined){
 
     //initialize the data
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<any>("");
 
     //initialize error
     //const [error, setError] = useState(null);
 
 
     useEffect(()=> {
+        console.log(`this is the fetch url : ${url}`)
+        //if undefined url is being passed, do not fetch
+        //this does not work at the moment somehow
+        if(url === undefined){
+            console.log("not fetching. undefined URL")
+            return;
+        } 
         
         //define async function for fetch API
         async function fetchAPI(){
-        const response = await fetch(url)
+        try {const response = await fetch(url!, { //adding a non-null assertion (ie: url will never be null or undefined)
+            method: 'GET',
+            headers: { Accept: "application/json"},
+          }) 
+
+          if (!response.ok) {
+            throw new Error(`Error! status: ${response.status}`);
+          }
+
         const fetcheddata = await response.json()
         setData(fetcheddata)
+
+        } catch (err) {
+            console.log(err);
+          }
        
         }
 
