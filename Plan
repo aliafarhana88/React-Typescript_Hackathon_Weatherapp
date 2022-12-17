@@ -1,0 +1,16 @@
+next steps
+
+- get the current time
+  -choose the current time from the weather data
+  -display the weather of the current hour.
+  -render it on the screen.
+
+-change background according to city
+
+- input field accepts input and it will give an error if input is wrong
+- glass display for the temperature
+
+CSS
+
+- look for font for the degree
+  -look for icon degree C
