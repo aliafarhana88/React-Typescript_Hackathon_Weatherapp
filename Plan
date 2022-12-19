@@ -14,3 +14,11 @@ CSS
 
 - look for font for the degree
   -look for icon degree C
+
+  19.12.22
+  thigs to add:
+
+- response to fetch error by stop rendering the weather card.
+- work on the try and catch error handling (repair useFetch custom hook if needed)
+- in weatherCard: work on the datalist / drop down list (or change to button)
+- fetch the background image. fix the problem with the double fetch request
