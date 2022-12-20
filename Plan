@@ -22,3 +22,4 @@ CSS
 - work on the try and catch error handling (repair useFetch custom hook if needed)
 - in weatherCard: work on the datalist / drop down list (or change to button)
 - fetch the background image. fix the problem with the double fetch request
+- in weatherCard : convert degreeF into degreeC for temperature & feels like

@@ -7,12 +7,16 @@ import ListItem from "../ListItem/ListItem"
 type inputType = {
     className ?: string;
     placeholder ?: string;
-    handleChange ?: (e: React.KeyboardEvent<HTMLInputElement>)=>void
+    //handleChange ?: (e: React.KeyboardEvent<HTMLInputElement>)=>void
     handleClick ?: (e: React.MouseEvent<HTMLElement, MouseEvent>)=>void
+    updateCity ?: (obj : any)=>void
 }
 
 
+
 export default function InputField(prop : inputType){
+    const {className, placeholder, updateCity} = prop
+
     const [event, setEvent ] = useState<string>("");
     const [city, setCity] = useState<string>(""); //city is the typed city in the input field
     const [citySuggestion, setcitySuggestion] = useState<any[]>([]) //array of city suggestion
@@ -26,22 +30,23 @@ export default function InputField(prop : inputType){
 
     const url = city === "" ? undefined : `${proxyURL}${placesURL}`;
     
-    
-    const data = useFetch(url); //fetch city suggestion
+    //fetch city suggestion
+    const data = useFetch(url); 
+    //console.log(data?.predictions[0])
 
     //fetch image of the city ( a 2-step process)
 
-    const selectedCityURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${selectedCityid}&fields=photo&key=${process.env.REACT_APP_PLACES_API_KEY}`;
+    // const selectedCityURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${selectedCityid}&fields=photo&key=${process.env.REACT_APP_PLACES_API_KEY}`;
     
-    const selectedCityURL_combined = selectedCityid === "" ? undefined : `${proxyURL}${selectedCityURL}`
-    const selectedCityData = useFetch(selectedCityURL_combined)
+    // const selectedCityURL_combined = selectedCityid === "" ? undefined : `${proxyURL}${selectedCityURL}`
+    // const selectedCityData = useFetch(selectedCityURL_combined)
 
-    useEffect(()=>{
-        if(selectedCityData.status === "OK"){
-            setPlacesPhotoID (selectedCityData.result.photos[0].photo_reference)
-            console.log(placesPhotoID)
-        }
-    },[placesPhotoID, selectedCityData])
+    // useEffect(()=>{
+    //     if(selectedCityData.status === "OK"){
+    //         setPlacesPhotoID (selectedCityData.result.photos[0].photo_reference)
+    //         console.log(placesPhotoID)
+    //     }
+    // },[placesPhotoID, selectedCityData])
    
     
     // const photoURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placesPhotoID}&fields=photo&key=${process.env.REACT_APP_PLACES_API_KEY}`;
@@ -67,6 +72,7 @@ export default function InputField(prop : inputType){
     setEvent(e.target.value)
     }
 
+    //function that assigns the selected city with its ID (for image rendering)
     function handleClick(e : React.MouseEvent<HTMLElement, MouseEvent>){
         //setCityState((e.target as HTMLInputElement).value)
         const selectedCity = (e.target as HTMLElement).innerText
@@ -81,23 +87,50 @@ export default function InputField(prop : inputType){
 
         }
     
+    function handleChange(e: React.KeyboardEvent<HTMLInputElement>){
+
+        //set the city state according to the input value when Enter button is pressed. 
+        if (e.key === "Enter"){
+          const cityInput = (e.target as HTMLInputElement).value //the raw input by user
+            //if city suggestion exist, get the first object from citysuggestion
+            if (cityInput !== citySuggestion[0].description){
+                updateCity?.(citySuggestion[0]);
+                console.log(`citydata updated`)
+                console.log(citySuggestion[0])
+            } else {
+                //find index of the selected city
+                const index = citySuggestion.findIndex(city => city.descrption === cityInput);
+                updateCity?.(citySuggestion[index])
+                console.log(`city data updated`)
+                console.log(citySuggestion[index])
+
+            }
+            console.log(`city data is not updated`)
+
+          //setCityState(rawCityInput)    
+            //setCity(filteredCityInput(cityState));
+              
+          
+            }
+            
+          }    
 
     console.log(`this is citysuggestion ${citySuggestion}`)
     console.log(citySuggestion)
 
-    const {className, placeholder, handleChange} = prop
+    
     return (
         <div>
         <>
         <input list = "cities" onChange = {onChange} onKeyPress = {handleChange} className = {className} placeholder= {placeholder}/>
-        {citySuggestion?.map((obj : any)=>{
+        {/* {citySuggestion?.map((obj : any)=>{
           return  <ListItem key = {obj.description} text = {obj.description} handleClick = {handleClick}/>
-        })}
-        {/* <datalist id = "cities">
+        })} */}
+        <datalist id = "cities">
             {citySuggestion?.map((obj: any)=>{
             return  <option key={obj.description} value = {obj.description} />
             })};
-        </datalist> */}
+        </datalist>
         </>
         </div>
     )

@@ -13,20 +13,35 @@ type WeatherObjType = {
   weatherDescription : object 
 }
 
+interface CityDataType  {
+  description : string,
+  matched_substrings: object[],
+  place_id : string,
+  reference : string,
+  structured_formatting : {},
+  terms : object[],
+  types : []
+}
+
 function App() {
-//fetch geocode (for latitude and longitude based on location)
-//required input: city, country code (stretch goal: make this a dropdown)
-//stretch goal: put this useFetch in a hook
-const [cityState, setCityState] = useState("");
-const [city, setCity] = useState("");
+
+const [cityData, setCityData] = useState<CityDataType>(); //an object containing city's information, fetched from place API
+//const [cityState, setCityState] = useState(""); // remove this later. will have replace with cityobject
+const [city, setCity] = useState("");  //change this to city object. updated based on suggested city (in the inputField component)
 const [weather, setWeather] = useState<WeatherObjType>()
 
- 
-//get the lat and lon, round to two decimals
-// const lat = (data[0]?.lat.toFixed(2))
-// const lon = (data[0]?.lon.toFixed(2))
-// console.log(`this is lat: ${lat}, this is lon: ${lon}`)
+function updateCity(newCityData : CityDataType){ //this function is called in InputField component (upon hit enter)
+  setCityData(newCityData) //update the city object
+  console.log(`this is city data ${cityData}`)
+  console.log(cityData)
+  let city = newCityData.description; //city string
+  city = filteredCityInput(city);//filter the string for API call
+  setCity(city)   //update the city state
+}
 
+
+
+ 
 //this function filters the city input so that the city can be recognized by the weather API.
 //smooth the city input. ie: fill gap with % and remove words after a comma ,
 //add %20 if there are blank spaces in the cityInput. use \s regex that represent single white space. 
@@ -40,19 +55,10 @@ function filteredCityInput(city : string){
   }
 }
 
-function handleChange(e: React.KeyboardEvent<HTMLInputElement>){
 
-  //set the city state according to the input value when Enter button is pressed. 
-  if (e.key === "Enter"){
-    const rawCityInput = (e.target as HTMLInputElement).value //the raw input by user
-    setCityState(rawCityInput)    
-    setCity(filteredCityInput(cityState));
 
-  }
-  
-}
-
-console.log(city)
+//console.log(city)
+//let city = cityData?.description;
 
 const openWeatherKey = process.env.REACT_APP_OPEN_WEATHER_KEY;
 //const geoCodeURL = cityState === ""? undefined :  `https://api.openweathermap.org/geo/1.0/direct?q=${cityInput}&limit=1&appid=${openWeatherKey}`;
@@ -111,7 +117,11 @@ let thisHour = today.toLocaleTimeString('en-GB', {  hour12: true,
         <p>weather in {weather?.city}, {weather?.country}</p>
         <p>{`${thisDay} ${thisHour}`}</p>
       </header>
-      <InputField handleChange = {handleChange} className = "input-field" placeholder = "enter your city"/>
+      <InputField 
+        updateCity = {updateCity}
+        // handleChange = {handleChange} 
+        className = "input-field" placeholder = "enter your city"/>
+      <button >get weather</button>
       <WeatherObject weather = {weather} data = {data} />
       
     </div>
