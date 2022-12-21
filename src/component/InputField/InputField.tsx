@@ -7,7 +7,6 @@ import ListItem from "../ListItem/ListItem"
 type inputType = {
     className ?: string;
     placeholder ?: string;
-    //handleChange ?: (e: React.KeyboardEvent<HTMLInputElement>)=>void
     handleClick ?: (e: React.MouseEvent<HTMLElement, MouseEvent>)=>void
     updateCity ?: (obj : any)=>void
 }
@@ -17,8 +16,8 @@ type inputType = {
 export default function InputField(prop : inputType){
     const {className, placeholder, updateCity} = prop
 
-    const [event, setEvent ] = useState<string>("");
-    const [city, setCity] = useState<string>(""); //city is the typed city in the input field
+    const [event, setEvent ] = useState<string>(""); //will be update when the input field is changed (onChange)
+    const [city, setCity] = useState<string>(""); //city is the typed city in the input field (updated with 'event' state)
     const [citySuggestion, setcitySuggestion] = useState<any[]>([]) //array of city suggestion
     const [selectedCityid, setCityID] = useState<string>("") //reference ID of the selected city
     const [placesPhotoID, setPlacesPhotoID] = useState<string>("") //ID of the selected city
@@ -34,29 +33,7 @@ export default function InputField(prop : inputType){
     const data = useFetch(url); 
     //console.log(data?.predictions[0])
 
-    //fetch image of the city ( a 2-step process)
-
-    // const selectedCityURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${selectedCityid}&fields=photo&key=${process.env.REACT_APP_PLACES_API_KEY}`;
     
-    // const selectedCityURL_combined = selectedCityid === "" ? undefined : `${proxyURL}${selectedCityURL}`
-    // const selectedCityData = useFetch(selectedCityURL_combined)
-
-    // useEffect(()=>{
-    //     if(selectedCityData.status === "OK"){
-    //         setPlacesPhotoID (selectedCityData.result.photos[0].photo_reference)
-    //         console.log(placesPhotoID)
-    //     }
-    // },[placesPhotoID, selectedCityData])
-   
-    
-    // const photoURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placesPhotoID}&fields=photo&key=${process.env.REACT_APP_PLACES_API_KEY}`;
-    // const photoURL_combined = placesPhotoID === "" ? undefined : `${proxyURL}${photoURL}`;
-
-    // const cityPhoto = useFetch(photoURL_combined)
-    // console.log(cityPhoto)
-
-    //console.log(selectedCityData.status)
-    //console.log(data)
 
     //function that updates the state city onChange (with delay)
     //use time delay to call places API to prevent rate-limit or error 429 (too many requests)
@@ -95,17 +72,17 @@ export default function InputField(prop : inputType){
             //if city suggestion exist, get the first object from citysuggestion
             if (cityInput !== citySuggestion[0].description){
                 updateCity?.(citySuggestion[0]);
-                console.log(`citydata updated`)
+                console.log(`citydata updated1`)
                 console.log(citySuggestion[0])
             } else {
                 //find index of the selected city
-                const index = citySuggestion.findIndex(city => city.descrption === cityInput);
+                const index = citySuggestion.findIndex(city => city.description === cityInput);
                 updateCity?.(citySuggestion[index])
-                console.log(`city data updated`)
+                console.log(`city data updated2`)
                 console.log(citySuggestion[index])
 
             }
-            console.log(`city data is not updated`)
+            //console.log(`city data is not updated`)
 
           //setCityState(rawCityInput)    
             //setCity(filteredCityInput(cityState));
