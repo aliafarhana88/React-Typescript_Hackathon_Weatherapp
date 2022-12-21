@@ -24,3 +24,6 @@ CSS
 - fetch the background image. fix the problem with the double fetch request
 - in weatherCard : convert degreeF into degreeC for temperature & feels like
 - add dark mode toggle : use useContext hook
+- add a default background when the app mounts, and then change the background to city background
+  -consider use smaller background for city, and then a larger plain background at the back.
+  -consider wrapping background div in the main App.js (instead of making it a component)

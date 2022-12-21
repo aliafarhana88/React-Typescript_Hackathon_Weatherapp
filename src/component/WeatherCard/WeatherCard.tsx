@@ -61,7 +61,7 @@ const iconCode = weather.weatherDescription.icon;
 
 }else {
     console.log(`weather Data is not ready`)
-    return <p>My Weather App</p> ;
+    return <div><p>render default div here when weather input is required</p> </div>;
 }
 
    

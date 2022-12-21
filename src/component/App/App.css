@@ -2,7 +2,13 @@
   text-align: center;
 }
 
-.App-logo {
+.background-image{
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size : cover;
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -11,7 +17,7 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
 .App-header {
   background-color: #282c34;

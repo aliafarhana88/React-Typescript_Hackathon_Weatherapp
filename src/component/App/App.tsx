@@ -5,6 +5,7 @@ import useFetch from "../../Hook/useFetch"
 import InputField from '../InputField/InputField';
 import WeatherObject from '../WeatherCard/WeatherCard';
 import BackgroundCard from "../BackgroundCard/BackgroundCard"
+import bgImg from "../../Images/pexels_binyamin_mellish_108941.jpeg" //default background image saved locally
 
 type WeatherObjType = {
   city : string,
@@ -128,11 +129,10 @@ const data = useFetch(url);
     //step-2 : get the image URI corresponding to the photo ID from places API
     const imageURI = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${placePhotoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=400&maxheight=400`;
 
-//set a default background image
-const defaultImg = '../../Images/pexels_binyamin_mellish_108941.jpeg';
 
 //dynamically change background image when city is changed
-const imgSrc = placePhotoRef === "" ? defaultImg : imageURI;
+//bgImg is the default background imaged, saved locally in this repo
+const imgSrc = placePhotoRef === "" ? bgImg : imageURI;
 
 //get today's date and time
 const today = new Date();
@@ -150,13 +150,14 @@ let thisHour = today.toLocaleTimeString('en-GB', {  hour12: true,
         <p>weather in {weather?.city}, {weather?.country}</p>
         <p>{`${thisDay} ${thisHour}`}</p>
       </header>
+      <div className = "background-image" style = {{backgroundImage : `url(${bgImg})`}}>
       <InputField 
         updateCity = {updateCity}
         className = "input-field" placeholder = "enter your city"/>
       <button >get weather</button>
       <WeatherObject weather = {weather} data = {data} />
-      <BackgroundCard imgSrc= {imgSrc} altTxt = "image of city"/>
-      {/* <BackgroundCard imgSrc = {`https://images.pexels.com/photos/108941/pexels-photo-108941.jpeg`} altTxt = "image 2"/> */}
+      <BackgroundCard imgSrc= {imgSrc} className = "background-image"/>
+      </div>
     </div>
   );
 }
