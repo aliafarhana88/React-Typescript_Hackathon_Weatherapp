@@ -1,11 +1,21 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: black;
+  user-select: none;
+}
+
 .App {
   text-align: center;
 }
 
 .background-image{
-  height: 100vh;
+  min-height: 90vh;
   background-repeat: no-repeat;
   background-size : cover;
+  background-position: center bottom;
+ 
 }
 
 /* .App-logo {
@@ -20,17 +30,34 @@
 } */
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #a5c4d4; */
+  background-color: rgba(158, 144, 162, 0.5);
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 5px;
+  box-shadow: 0px 0px 10px 10px rgb(158, 144, 162, 0.5);
+
+
 }
 
-.App-link {
+/* .App-header ::before {
+  position: absolute;
+  z-index: -1;
+  /* go outside padding-box by 
+  * a border-width ($b) in every direction */
+  /* top: 1.5em; right: 1.5em; bottom: 1.5em; left: 1.5em;
+  border: inherit;
+  border-color: transparent;
+  background: inherit;
+  background-clip: border-box;
+  content: '';
+
+} */ 
+
+/* .App-link {
   color: #61dafb;
 }
 
@@ -41,4 +68,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

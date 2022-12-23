@@ -34,11 +34,6 @@ const [placePhotoRef, setPlacePhotoRef] = useState<string>("") //photo reference
 
 function updateCity(newCityData : CityDataType){ //this function is called in InputField component (upon hit enter)
   setCityData(newCityData) //update the city object
-  //console.log(`this is city data ${cityData}`)
-  //console.log(cityData)
-  // let city = newCityData.description; //city string
-  // city = filteredCityInput(city);//filter the string for API call
-  // setCity(city)   //update the city state
 }
 
 //updating the 'city' state insisde useEffect hook, ensuring that 'city' state is updated when 'cityData' state is updated. 
@@ -117,9 +112,12 @@ const data = useFetch(url);
     const placeURL_combined = placeID === "" ? undefined : `${proxyURL}${placeURL}`
     const placeData = useFetch(placeURL_combined)
 
+    console.log(`this is placeData:`)
+    console.log(placeData)
+
     useEffect(()=>{
         if(placeData.status === "OK"){
-            setPlacePhotoRef (placeData.result.photos[0].photo_reference)
+            setPlacePhotoRef (placeData.result.photos[0].photo_reference) //error accessing this array when fetch is not successful. check conditions!!
             console.log(`this is photo ID: ${placePhotoRef}`)
         } else {
           setPlacePhotoRef("")
@@ -142,21 +140,21 @@ let thisHour = today.toLocaleTimeString('en-GB', {  hour12: true,
                                                     minute: "numeric"}); //get the current hour
 
 
-
+//dynamically change the title depending on the fetched data
+const Title = weather?.city ?  <h1>Weather in {weather?.city}, {weather?.country}</h1> : <h1>Weather Forecast</h1>
 
   return (
     <div className="App">
+      
+      <div className = "background-image" style = {{backgroundImage : `url(${imgSrc})`}}>
       <header className="App-header">
-        <p>weather in {weather?.city}, {weather?.country}</p>
-        <p>{`${thisDay} ${thisHour}`}</p>
+        {Title}
+        <p>{`${thisDay}`}</p> <p>{`${thisHour}`}</p>
       </header>
-      <div className = "background-image" style = {{backgroundImage : `url(${bgImg})`}}>
       <InputField 
         updateCity = {updateCity}
         className = "input-field" placeholder = "enter your city"/>
-      <button >get weather</button>
       <WeatherObject weather = {weather} data = {data} />
-      <BackgroundCard imgSrc= {imgSrc} className = "background-image"/>
       </div>
     </div>
   );

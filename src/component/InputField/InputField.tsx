@@ -1,6 +1,7 @@
 import useFetch from "../../Hook/useFetch"
 import React, {useState, useEffect} from "react"
 import ListItem from "../ListItem/ListItem"
+import "./InputField.css"
 
 
 
@@ -19,8 +20,7 @@ export default function InputField(prop : inputType){
     const [event, setEvent ] = useState<string>(""); //will be update when the input field is changed (onChange)
     const [city, setCity] = useState<string>(""); //city is the typed city in the input field (updated with 'event' state)
     const [citySuggestion, setcitySuggestion] = useState<any[]>([]) //array of city suggestion
-    const [selectedCityid, setCityID] = useState<string>("") //reference ID of the selected city
-    const [placesPhotoID, setPlacesPhotoID] = useState<string>("") //ID of the selected city
+
 
     //route all requests to the Places API through a proxy server (to remove CORS error)
     //herokuapp only provide temporary access. visit the url below to request for proxy access
@@ -49,20 +49,6 @@ export default function InputField(prop : inputType){
     setEvent(e.target.value)
     }
 
-    //function that assigns the selected city with its ID (for image rendering)
-    function handleClick(e : React.MouseEvent<HTMLElement, MouseEvent>){
-        //setCityState((e.target as HTMLInputElement).value)
-        const selectedCity = (e.target as HTMLElement).innerText
-        console.log(selectedCity)
-
-        //get the index of the object, and then get the object 
-        const index = citySuggestion.findIndex(city=> city.description === selectedCity)
-        
-        const places_id = citySuggestion[index].place_id
-        setCityID(places_id)
-        console.log(selectedCityid)
-
-        }
     
     function handleChange(e: React.KeyboardEvent<HTMLInputElement>){
 
@@ -97,13 +83,13 @@ export default function InputField(prop : inputType){
 
     
     return (
-        <div>
+        <div className = "div">
         <>
         <input list = "cities" onChange = {onChange} onKeyPress = {handleChange} className = {className} placeholder= {placeholder}/>
         {/* {citySuggestion?.map((obj : any)=>{
           return  <ListItem key = {obj.description} text = {obj.description} handleClick = {handleClick}/>
         })} */}
-        <datalist id = "cities">
+        <datalist className = "data-list" id = "cities">
             {citySuggestion?.map((obj: any)=>{
             return  <option key={obj.description} value = {obj.description} />
             })};

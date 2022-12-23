@@ -20,6 +20,9 @@ CSS
 
 - response to fetch error by stop rendering the weather card.
 - work on the try and catch error handling (repair useFetch custom hook if needed)
+  -render error on the screen, to prompt user to correct the city input field.
+- some city found in Google places are not found in Weather API -- catch this error and do not render images if weather API is not fetched. (example: kelantan)
+
 - in weatherCard: work on the datalist / drop down list (or change to button)
 - fetch the background image. fix the problem with the double fetch request
 - in weatherCard : convert degreeF into degreeC for temperature & feels like

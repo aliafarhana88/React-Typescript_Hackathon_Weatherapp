@@ -1,0 +1,19 @@
+.input-div{
+ display:flex;
+
+}
+
+.input-field{
+margin: 50px;
+width: 50vw;
+height: 5vh;
+position: static;
+border-radius: 10px;
+text-align: center;
+
+
+}
+
+.data-list{
+width: 50vw;
+}
